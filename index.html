@@ -1,70 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Senil</title>
+
 <style>
 body {
   margin:0;
-  overflow:hidden;
-  background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
   font-family: Arial;
   text-align:center;
+  overflow:hidden;
+  background:black;
   color:white;
 }
+
+/* Start Screen */
+#startScreen {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+#startBtn {
+  padding:15px 30px;
+  font-size:20px;
+  background:pink;
+  border:none;
+  border-radius:10px;
+  color:white;
+}
+
+/* Main Content */
+#mainContent {
+  display:none;
+  height:100vh;
+  background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
 h1 {
-  margin-top:50px;
-  font-size:30px;
+  font-size:28px;
   animation: glow 2s infinite alternate;
 }
+
 @keyframes glow {
-  from {text-shadow: 0 0 10px white;}
-  to {text-shadow: 0 0 20px yellow;}
+  from {text-shadow:0 0 10px white;}
+  to {text-shadow:0 0 30px yellow;}
 }
 
-/* Cake */
 .cake {
-  font-size:80px;
-  margin-top:20px;
+  font-size:110px;
   animation: bounce 2s infinite;
 }
+
 @keyframes bounce {
-  0%,100%{transform: translateY(0);}
-  50%{transform: translateY(-20px);}
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-30px);}
 }
 
-/* Hearts */
+/* hearts */
 .heart {
   position:absolute;
-  color:red;
   animation: float 5s linear infinite;
 }
+
 @keyframes float {
   0%{transform: translateY(100vh);}
   100%{transform: translateY(-10vh);}
 }
 </style>
+
 </head>
 
 <body>
 
-<h1>🎉 Happy Birthday Senil 😘 🎉</h1>
+<!-- Start Screen -->
+<div id="startScreen">
+  <h2>💖 Special Surprise 💖</h2>
+  <button id="startBtn">Tap to Start 🎁</button>
+</div>
 
-<div class="cake">🎂</div>
+<!-- Main Content -->
+<div id="mainContent">
+  <h1>🎉 Happy Birthday Senil 😘 🎉</h1>
+  <div class="cake">🎂</div>
+  <p>
+    You are my everything ❤️<br>
+    Forever with you 💕
+  </p>
+</div>
 
-<p>
-Happy birthday to you, my love ❤️ <br>
-You are my everything 💕 <br>
-Forever with you 💖
-</p>
+<!-- Music -->
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
+</audio>
 
 <script>
+
+// Start button
+document.getElementById("startBtn").onclick = function(){
+  document.getElementById("startScreen").style.display="none";
+  document.getElementById("mainContent").style.display="flex";
+  document.getElementById("music").play();
+};
+
 // hearts
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
   h.innerHTML="❤️";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(Math.random()*20+10)+"px";
+  h.style.fontSize=(Math.random()*30+20)+"px";
   document.body.appendChild(h);
 
   setTimeout(()=>{h.remove();},5000);
@@ -77,17 +131,18 @@ setInterval(()=>{
   c.style.position="absolute";
   c.style.left=Math.random()*100+"vw";
   c.style.top="-20px";
-  c.style.fontSize="20px";
+  c.style.fontSize="25px";
   document.body.appendChild(c);
 
   let fall=setInterval(()=>{
-    c.style.top=(c.offsetTop+5)+"px";
+    c.style.top=(c.offsetTop+7)+"px";
     if(c.offsetTop>window.innerHeight){
       c.remove();
       clearInterval(fall);
     }
   },50);
-},500);
+},400);
+
 </script>
 
 </body>
